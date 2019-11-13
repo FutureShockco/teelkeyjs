@@ -16,7 +16,7 @@ function status(response) {
 
 var avalon = {
     config: {
-        api: ['https://avalon.d.tube:443'],
+        api: ['https://teelkey.com:443'],
         //api: ['http://127.0.0.1:3002']
     },
     init: (config) => {
@@ -529,7 +529,9 @@ var avalon = {
         PROMOTED_COMMENT: 13,
         TRANSFER_VT: 14,
         TRANSFER_BW: 15,
-    
+        TRANSFER_ASSET: 16,
+        TRANSFER_NFT: 17,
+        USER_MASTER_JSON: 18
     }
 }
 

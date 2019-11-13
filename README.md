@@ -1,28 +1,28 @@
-# Javalon
+# Teelkey
 
 ## Install
 #### Require style
-Install with `npm install --save javalon` inside your project. Then just
+Install with `npm install --save teelkey` inside your project. Then just
 ```
-const javalon = require('javalon')
+const teelkey = require('teelkey')
 ```
 #### CDN style
-If you are working in the browser and want to load javalon from a CDN:
+If you are working in the browser and want to load teelkey from a CDN:
 ```
-<script src="https://unpkg.com/javalon/bin/javalon.min.js"></script>
+<script src="https://unpkg.com/teelkey/bin/teelkey.min.js"></script>
 ```
 
-By default, javalon hits on the main avalon testnet (https://avalon.d.tube). You can eventually make javalon hit on your local node or any avalon node like so:
+By default, teelkey hits on the main teelkey testnet (https://testnet.teelkey.com). You can eventually make teelkey hit on your local node or any teelkey node like so:
 
 ```
-javalon.init({api: 'http://localhost:3001'})
+teelkey.init({api: 'http://localhost:3001'})
 ```
 
 ## GET API
 
 ### GET single account
 ```
-javalon.getAccount('alice', (err, account) => {
+teelkey.getAccount('alice', (err, account) => {
     console.log(err, account)
 })
 ```
@@ -30,7 +30,7 @@ javalon.getAccount('alice', (err, account) => {
 ### GET many accounts
 Just pass an array of usernames instead
 ```
-javalon.getAccounts(['alice', 'bob'], (err, accounts) => {
+teelkey.getAccounts(['alice', 'bob'], (err, accounts) => {
     console.log(err, accounts)
 })
 ```
@@ -38,27 +38,27 @@ javalon.getAccounts(['alice', 'bob'], (err, accounts) => {
 ### GET account transaction history
 For the history, you also need to specify a block number. The api will return all blocks lower than the specified block where the user was involved in a transaction
 ```
-javalon.getAccountHistory('alice', 0, (err, blocks) => {
+teelkey.getAccountHistory('alice', 0, (err, blocks) => {
     console.log(err, blocks)
 })
 ```
 ### GET single content
 ```
-javalon.getContent('alice', 'pocNl2YhZdM', (err, content) => {
+teelkey.getContent('alice', 'pocNl2YhZdM', (err, content) => {
     console.log(err, content)
 })
 ```
 
 ### GET followers
 ```
-javalon.getFollowers('alice', (err, followers) => {
+teelkey.getFollowers('alice', (err, followers) => {
     console.log(err, followers)
 })
 ```
 
 ### GET following
 ```
-javalon.getFollowers('alice', (err, followers) => {
+teelkey.getFollowers('alice', (err, followers) => {
     console.log(err, followers)
 })
 ```
@@ -66,7 +66,7 @@ javalon.getFollowers('alice', (err, followers) => {
 ### GET contents by author
 You can pass a username and permlink (identifying a content) in the 2nd and 3rd argument to 'get more'.
 ```
-javalon.getDiscussionsByAuthor('alice', null, null, (err, contents) => {
+teelkey.getDiscussionsByAuthor('alice', null, null, (err, contents) => {
     console.log(err, contents)
 })
 ```
@@ -74,7 +74,7 @@ javalon.getDiscussionsByAuthor('alice', null, null, (err, contents) => {
 ### GET contents by creation time
 You can pass a username and a permlink to 'get more'.
 ```
-javalon.getNewDiscussions('alice', null, null, (err, contents) => {
+teelkey.getNewDiscussions('alice', null, null, (err, contents) => {
     console.log(err, contents)
 })
 ```
@@ -82,7 +82,7 @@ javalon.getNewDiscussions('alice', null, null, (err, contents) => {
 ### GET contents by popularity (hot)
 You can pass a username and a permlink to 'get more'.
 ```
-javalon.getHotDiscussions(null, null, (err, contents) => {
+teelkey.getHotDiscussions(null, null, (err, contents) => {
     console.log(err, contents)
 })
 ```
@@ -92,14 +92,14 @@ This lists the contents posted by the following of the passed username.
 
 You can pass a username and a permlink in the 2nd and 3rd argument to 'get more'.
 ```
-javalon.getFeedDiscussions('alice', null, null, (err, contents) => {
+teelkey.getFeedDiscussions('alice', null, null, (err, contents) => {
     console.log(err, contents)
 })
 ```
 
 ### GET notifications
 ```
-javalon.getNotifications('alice', (err, contents) => {
+teelkey.getNotifications('alice', (err, contents) => {
     console.log(err, contents)
 })
 ```
@@ -110,19 +110,19 @@ To send a transaction to the network, you will need multiple steps. First you ne
 
 ```
 var newTx = {
-    type: javalon.TransactionType.FOLLOW,
+    type: teelkey.TransactionType.FOLLOW,
     data: {
         target: 'bob'
     }
 }
 
-newTx = javalon.sign(alice_key, 'alice', newTx)
+newTx = teelkey.sign(alice_key, 'alice', newTx)
 ```
 After this step, the transaction is forged with a timestamp, hash, and signature. This transaction needs to be sent in the next 60 secs or will be forever invalid.
 
 You can send it like so
 ```
-javalon.sendTransaction(newTx, function(err, res) {
+teelkey.sendTransaction(newTx, function(err, res) {
     cb(err, res)
 })
 ```
@@ -130,7 +130,7 @@ The callback will return once your transaction has been included in a new block.
 
 Alternatively, you can just want the callback as soon as the receiving node has it, you can do:
 ```
-javalon.sendRawTransaction(newTx, function(err, res) {
+teelkey.sendRawTransaction(newTx, function(err, res) {
     cb(err, res)
 })
 ```
@@ -139,14 +139,18 @@ javalon.sendRawTransaction(newTx, function(err, res) {
 
 ### Generate a keypair
 ```
-console.log(javalon.keypair())
+console.log(teelkey.keypair())
 ```
 
 ### Growing variables
 Voting Power and Bandwidth are growing in time but the API will only return the latest update in the `vt` and `bw` fields of the accounts. To get the actual value, use votingPower() and bandwidth()
 ```
-javalon.getAccount('alice', (err, account) => {
-    console.log(javalon.votingPower(account))
-    console.log(javalon.bandwidth(account)) 
+teelkey.getAccount('alice', (err, account) => {
+    console.log(teelkey.votingPower(account))
+    console.log(teelkey.bandwidth(account)) 
 })
 ```
+
+### Credits
+We would like to give all the credits to the people making available these resources.
+- Avalon : https://github.com/dtube/avalon
