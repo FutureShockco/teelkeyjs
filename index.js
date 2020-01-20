@@ -14,16 +14,16 @@ function status(response) {
     return response.json().then(res => Promise.reject(res))
 }
 
-var avalon = {
+var teelkey = {
     config: {
         api: ['https://teelkey.com:443'],
         //api: ['http://127.0.0.1:3002']
     },
     init: (config) => {
-        avalon.config = config
+        teelkey.config = config
     },
     getAccount: (name, cb) => {
-        fetch(avalon.randomNode()+'/account/'+name, {
+        fetch(teelkey.randomNode()+'/account/'+name, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -36,7 +36,7 @@ var avalon = {
         })
     },
     getAccountHistory: (name, lastBlock, cb) => {
-        fetch(avalon.randomNode()+'/history/'+name+'/'+lastBlock, {
+        fetch(teelkey.randomNode()+'/history/'+name+'/'+lastBlock, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -49,7 +49,7 @@ var avalon = {
         })
     },
     getAccounts: (names, cb) => {
-        fetch(avalon.randomNode()+'/accounts/'+names.join(','), {
+        fetch(teelkey.randomNode()+'/accounts/'+names.join(','), {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -62,7 +62,7 @@ var avalon = {
         })
     },
     getContent: (name, link, cb) => {
-        fetch(avalon.randomNode()+'/content/'+name+'/'+link, {
+        fetch(teelkey.randomNode()+'/content/'+name+'/'+link, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -75,7 +75,7 @@ var avalon = {
         })
     },
     getFollowing: (name, cb) => {
-        fetch(avalon.randomNode()+'/follows/'+name, {
+        fetch(teelkey.randomNode()+'/follows/'+name, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -88,7 +88,7 @@ var avalon = {
         })
     },
     getFollowers: (name, cb) => {
-        fetch(avalon.randomNode()+'/followers/'+name, {
+        fetch(teelkey.randomNode()+'/followers/'+name, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -111,7 +111,7 @@ var avalon = {
         if (!content || !content.child || !root.comments) return []
         for (var i = 0; i < content.child.length; i++) {
             var comment = root.comments[content.child[i][0]+'/'+content.child[i][1]]
-            comment.replies = avalon.generateCommentTree(root, comment.author, comment.link)
+            comment.replies = teelkey.generateCommentTree(root, comment.author, comment.link)
             comment.ups = 0
             comment.downs = 0
             if (comment.votes) 
@@ -132,7 +132,7 @@ var avalon = {
     },
     getDiscussionsByAuthor: (username, author, link, cb) => {
         if (!author && !link) 
-            fetch(avalon.randomNode()+'/blog/'+username, {
+            fetch(teelkey.randomNode()+'/blog/'+username, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -144,7 +144,7 @@ var avalon = {
                 cb(error)
             })
         else 
-            fetch(avalon.randomNode()+'/blog/'+username+'/'+author+'/'+link, {
+            fetch(teelkey.randomNode()+'/blog/'+username+'/'+author+'/'+link, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -159,7 +159,7 @@ var avalon = {
     },
     getNewDiscussions: (author, link, cb) => {
         if (!author && !link) 
-            fetch(avalon.randomNode()+'/new', {
+            fetch(teelkey.randomNode()+'/new', {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -171,7 +171,7 @@ var avalon = {
                 cb(error)
             })
         else 
-            fetch(avalon.randomNode()+'/new/'+author+'/'+link, {
+            fetch(teelkey.randomNode()+'/new/'+author+'/'+link, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -186,7 +186,7 @@ var avalon = {
     },
     getHotDiscussions: (author, link, cb) => {
         if (!author && !link) 
-            fetch(avalon.randomNode()+'/hot', {
+            fetch(teelkey.randomNode()+'/hot', {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -198,7 +198,7 @@ var avalon = {
                 cb(error)
             })
         else 
-            fetch(avalon.randomNode()+'/hot/'+author+'/'+link, {
+            fetch(teelkey.randomNode()+'/hot/'+author+'/'+link, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -213,7 +213,7 @@ var avalon = {
     },
     getTrendingDiscussions: (author, link, cb) => {
         if (!author && !link) 
-            fetch(avalon.randomNode()+'/trending', {
+            fetch(teelkey.randomNode()+'/trending', {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -225,7 +225,7 @@ var avalon = {
                 cb(error)
             })
         else 
-            fetch(avalon.randomNode()+'/trending/'+author+'/'+link, {
+            fetch(teelkey.randomNode()+'/trending/'+author+'/'+link, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -240,7 +240,7 @@ var avalon = {
     },
     getFeedDiscussions: (username, author, link, cb) => {
         if (!author && !link) 
-            fetch(avalon.randomNode()+'/feed/'+username, {
+            fetch(teelkey.randomNode()+'/feed/'+username, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -252,7 +252,7 @@ var avalon = {
                 cb(error)
             })
         else 
-            fetch(avalon.randomNode()+'/feed/'+username+'/'+author+'/'+link, {
+            fetch(teelkey.randomNode()+'/feed/'+username+'/'+author+'/'+link, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -266,7 +266,7 @@ var avalon = {
         
     },
     getNotifications: (username, cb) => {
-        fetch(avalon.randomNode()+'/notifications/'+username, {
+        fetch(teelkey.randomNode()+'/notifications/'+username, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -279,7 +279,7 @@ var avalon = {
         })
     },
     getSchedule: (cb) => {
-        fetch(avalon.randomNode()+'/schedule', {
+        fetch(teelkey.randomNode()+'/schedule', {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -292,7 +292,7 @@ var avalon = {
         })
     },
     getLeaders: (cb) => {
-        fetch(avalon.randomNode()+'/allminers', {
+        fetch(teelkey.randomNode()+'/allminers', {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -305,7 +305,7 @@ var avalon = {
         })
     },
     getRewardPool: (cb) => {
-        fetch(avalon.randomNode()+'/rewardpool', {
+        fetch(teelkey.randomNode()+'/rewardpool', {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -318,7 +318,7 @@ var avalon = {
         })
     },
     getRewards: (name, cb) => {
-        fetch(avalon.randomNode()+'/distributed/'+name, {
+        fetch(teelkey.randomNode()+'/distributed/'+name, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -355,8 +355,6 @@ var avalon = {
                 console.log('invalid transaction')
                 return
             }
-        
-        
         tx.sender = sender
         // add timestamp to seed the hash (avoid transactions reuse)
         tx.ts = new Date().getTime()
@@ -368,12 +366,12 @@ var avalon = {
         return tx
     },
     sendTransaction: (tx, cb) => {
-        avalon.sendRawTransaction(tx, function(error, headBlock) {
+        teelkey.sendRawTransaction(tx, function(error, headBlock) {
             if (error) 
                 cb(error)
             else 
                 setTimeout(function() {
-                    avalon.verifyTransaction(tx, headBlock, 5, function(error, block) {
+                    teelkey.verifyTransaction(tx, headBlock, 5, function(error, block) {
                         if (error) console.log(error)
                         else cb(null, block)
                     })
@@ -382,7 +380,7 @@ var avalon = {
         })
     },
     sendRawTransaction: (tx, cb) => {
-        fetch(avalon.randomNode()+'/transact', {
+        fetch(teelkey.randomNode()+'/transact', {
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -402,7 +400,7 @@ var avalon = {
     },
     verifyTransaction: (tx, headBlock, retries, cb) => {
         var nextBlock = headBlock+1
-        fetch(avalon.randomNode()+'/block/'+nextBlock, {
+        fetch(teelkey.randomNode()+'/block/'+nextBlock, {
             method: 'get',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -415,7 +413,7 @@ var avalon = {
                 // block is not yet available, retrying in 1.5 secs
                 if (retries <= 0) return
                 retries--
-                setTimeout(function(){avalon.verifyTransaction(tx, headBlock, retries, cb)}, 1500)
+                setTimeout(function(){teelkey.verifyTransaction(tx, headBlock, retries, cb)}, 1500)
                 return
             }
 
@@ -431,7 +429,7 @@ var avalon = {
                 cb(null, block)
             else if (retries > 0) {
                 retries--
-                setTimeout(function(){avalon.verifyTransaction(tx, nextBlock, retries, cb)},3000)
+                setTimeout(function(){teelkey.verifyTransaction(tx, nextBlock, retries, cb)},3000)
             } else 
                 cb('Failed to find transaction up to block #'+nextBlock)
             
@@ -441,7 +439,7 @@ var avalon = {
         // if no ephemPriv is passed, a new random key is generated
         if (!cb) {
             cb = ephemPriv
-            ephemPriv = avalon.keypair().priv
+            ephemPriv = teelkey.keypair().priv
         }
         try {
             if (ephemPriv)
@@ -500,7 +498,7 @@ var avalon = {
         }
     },
     randomNode: () => {
-        var nodes = avalon.config.api
+        var nodes = teelkey.config.api
         if (typeof nodes === 'string') return nodes
         else return nodes[Math.floor(Math.random()*nodes.length)]
     },
@@ -522,18 +520,27 @@ var avalon = {
         USER_JSON: 6,
         FOLLOW: 7,
         UNFOLLOW: 8,
-        // RESHARE: 9, // not sure
-        NEW_KEY: 10,
-        REMOVE_KEY: 11,
-        CHANGE_PASSWORD: 12,
-        PROMOTED_COMMENT: 13,
-        TRANSFER_VT: 14,
-        TRANSFER_BW: 15,
-        TRANSFER_ASSET: 16,
-        TRANSFER_NFT: 17,
-        USER_MASTER_JSON: 18
+        NEW_KEY: 9,
+        REMOVE_KEY: 10,
+        CHANGE_PASSWORD: 11,
+        CHANGE_RECOVERY: 12,
+        START_RECOVERING: 13,
+        RECOVER_ACCOUNT: 14,
+        PROMOTED_COMMENT: 15,
+        TRANSFER_VT: 16,
+        TRANSFER_BW: 17,
+        TRANSFER_ASSET: 18,
+        TRANSFER_NFT: 19,
+        BID_NFT: 20,
+        SELL_NFT: 21,
+        TRADE_NFT: 22,
+        BUY: 23,
+        SELL: 24,
+        CREATE_ASSET: 25,
+        ISSUE_ASSET: 26,
+        USER_MASTER_JSON: 27
     }
 }
 
-if (typeof window != 'undefined') window.javalon = avalon
-module.exports = avalon
+if (typeof window != 'undefined') window.jteelkey = teelkey
+module.exports = teelkey

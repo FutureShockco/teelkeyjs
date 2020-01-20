@@ -1,6 +1,6 @@
 {
-  "name": "teelkey",
-  "version": "1.0.1",
+  "name": "teelkeyjs",
+  "version": "1.0.23",
   "description": "javascript api for the teelkey blockchain",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "currency",
     "crypto"
   ],
-  "author": "Adrien M",
+  "author": "Adrien M & Hightouch",
   "license": "MIT",
   "devDependencies": {
     "browserify": "^16.5.0",
@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skzap/javalon.git"
+    "url": "git+https://github.com/FutureShockco/teelkeyjs"
   },
   "bugs": {
-    "url": "https://github.com/skzap/javalon/issues"
+    "url": "https://github.com/FutureShockco/teelkeyjs/issues"
   },
-  "homepage": "https://github.com/skzap/javalon#readme"
+  "homepage": "https://github.com/FutureShockco/teelkeyjs"
 }
