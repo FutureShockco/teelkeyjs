@@ -1,4 +1,4 @@
-# Teelkey
+# TeelkeyJS
 
 ## Install
 #### Require style
